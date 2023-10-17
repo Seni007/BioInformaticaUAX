@@ -1,0 +1,234 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "4a65720b-28f9-4a5d-b2d6-0560e40a4b4b",
+   "metadata": {},
+   "source": [
+    "# Bash desde Jupyter\n",
+    "\n",
+    "### Wildcards"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7701751f-37c3-4df3-8a96-5179a33fee64",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mi_primer_string=\"Este es mi primer string\"\n",
+    "echo $mi_primer_string"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "16c07c26-49f3-43f5-981d-1462642d84be",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mkdir carpeta_bash"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "2c963fa0-3590-4d1c-b41e-6b88388e79c5",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cd carpeta_bash\n",
+    "touch mi_prueb1.txt prueba20.txt prueba3.txt pruebaaaaa4.txt prueba_no_mas.txt reporte.pdf reporte_40.txt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "44ba00d9-2d6f-4ce9-8097-358d6c7ce71a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ls"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "e87aa94f-e4dc-4c8b-96cb-8202f3ec049b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Todos los archivos que empiecen por prueba\n",
+    "ls -l prueba*"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "077af25f-3dc8-4081-9a62-a5a792fa5e8e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Todos los archivos que acaben en .txt\n",
+    "ls -l *\\.txt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "77c59f5f-0e67-4c25-ac67-c27de075ae8d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Todos los archivos que contengan la palabra prueba con tres caracteres cualquiera antes\n",
+    "ls -l ???prueb*"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "59e76a09-aa0b-45aa-8d45-386fc7f2d640",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Todos los archivos que contengan 1 o 3 en su nombre\n",
+    "ls -l *[13]*\\.txt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "88c6bc12-0193-4559-93b7-94cf06d8274a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Todos los archivos que contengan dos números seguidos en su nombre\n",
+    "ls -l *[0-9][0-9]*"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "bbf57168-3da4-45da-8359-23e54faeb094",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ls -l [a-z]*\\.pdf"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "806ef716-efab-4ea7-b9bd-cb419a2df550",
+   "metadata": {},
+   "source": [
+    "### Operadores I/O"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "08a1b52d-6793-49cc-a9ba-983358d8a925",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Crear un archivo llamado generos_bacterias\n",
+    "echo -e \"\\nRickettsia\\nOrientia\\nWolbachia\\nHolospora\\nEhrlichia\\nOdysella\\nTectibacter\" > generos_bacteria.txt\n",
+    "cat generos_bacteria.txt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "122b819f-5b36-4b7a-a953-1c1b63911e5a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Añadimos un nombre más\n",
+    "echo -e \"Escherichia\\n\" >> generos_bacteria.txt\n",
+    "cat generos_bacteria.txt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7a729504-2906-4047-a69f-fc941220bebe",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ordenamos el contenido del archivo\n",
+    "(sort < generos_bacteria.txt) > generos_bacteria_sorted.txt\n",
+    "cat generos_bacteria_sorted.txt"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "19da3678-614a-4ba5-a5ab-1ce7d71e2675",
+   "metadata": {},
+   "source": [
+    "### Variables de entorno"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ef3561cd-36fa-4b92-8b08-549489bd9648",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "which python"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "f1146bee-a21e-4490-9b4d-6dae66d81021",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "echo $PATH"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "45a5a7d1-9c58-4ed8-8da5-e8b6f40bfd6e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "echo $HOME"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "edee8744-d76c-480a-9c91-b0420f2d0042",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "echo $SHELL"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
