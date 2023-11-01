@@ -1,0 +1,54 @@
+
+
+# 1.- Cargar los datos y examinarlos en R. Utiliza la función head, summary y str
+datos<-read.table("datos-trabajoR.txt",sep="\t",header=TRUE)
+head(datos)
+str(datos)
+
+# 2.- Hacemos un boxplot con nuestros datos (uno para cada variable)
+# Para variable 1 verde y para variable 2 morado
+boxplot(Variable1 ~ Tratamiento, data=datos, col="green", cex.axis=0.7, las=2,
+ylab="Variable 1", xlab= "Tratamiento", cex.lab=0.75)
+boxplot(Variable2 ~ Tratamiento, data=datos, col="purple", cex.axis=0.7, las=2,
+ylab="Variable 1", xlab= "Tratamiento", cex.lab=0.75)
+
+# 3.- Hacemos un gráfico de dispersión con las dos variables. Queremos que cada tratamiento se vea reflejado
+plot(datos$Variable1,datos$Variable2,col=datos$Tratamiento,xlab="Variable 1",ylab="Variable 2")
+legend(x="bottomright", legend=c("Tto 1","Tto 2","Tto 3","Tto 4","Tto 5"),fill=c("black","red","green","lightblue","darkblue"))
+
+# 4.- Hacemos un histograma para cada variable. Variable1 en verde y 2 en morado.
+hist(datos$Variable1,col="green")
+hist(datos$Variable2,col="purple")
+
+# 5.- Hacemos un factor de la columna tratamiento
+tto <- factor(datos$Tratamiento)
+tto
+
+# 6.- Calcula la media y la desviación estándar para cada tratamiento de cada variable. Pista: usa aggregate() o tapply()
+aggregate(Variable1~tto, data=datos,mean)
+aggregate(Variable2~tto,data=datos,mean)
+aggregate(Variable1~tto, data=datos,sd)
+aggregate(Variable2~tto,data=datos,sd)
+tapply(datos$Variable1,tto,mean)
+
+# 7.- ¿Puedes averiguar cuántos elementos tiene cada tratamiento? Pista: usa table()
+dim(datos)
+table(tto)
+
+# 9.- Extrae los datos para cada tratamiento y guardalos en una variable
+tto1<-datos[datos$Tratamiento == 1,]
+tto2<-datos[datos$Tratamiento == 2,]
+tto3<-datos[datos$Tratamiento == 3,]
+tto4<-datos[datos$Tratamiento == 4,]
+tto5<-datos[datos$Tratamiento == 5,]
+
+# 10.- Nuestra hipótesis nula es que las medias de tto 1 y tto4 son iguales para Variable 1.
+# ¿Puedes comprobarlo? 
+# ¿Qué test usarías de acuerdo con la prueba de normalidad de Variable 1 para cada Tratamiento?
+# Asumimos que son idependientes. ¿Sus varianzas serían iguales?
+shapiro.test(tto1$Variable1)
+shapiro.test(tto4$Variable1)
+var(tto1$Variable1)
+var(tto4$Variable1)
+t.test(tto1$Variable1,tto4$Variable1)
+wilcox.test(tto1$Variable1,tto4$Variable1,alternative="g")
