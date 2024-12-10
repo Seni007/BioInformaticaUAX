@@ -1,3 +1,3 @@
-# BioInformaticaUAX
+# BioInformatica
 
-Esto es una prueba 
+Pequeños projectos en R, python y bash 
